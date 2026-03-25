@@ -1,0 +1,38 @@
+import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
+import { ThemeProvider as NavThemeProvider } from '@react-navigation/native'
+import { Stack } from 'expo-router'
+import 'react-native-reanimated'
+import { ThemeProvider } from '@theme/ThemeProvider'
+import ThemedStatusBar from '@components/themedStatusBar'
+import { RootErrorBoundary } from '@components/rootErrorBoundary'
+
+export const unstable_settings = {
+  anchor: '(tabs)',
+}
+
+export default function RootLayout() {
+  return (
+    <RootErrorBoundary>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        <ThemeProvider>
+          {(navTheme) => (
+            <NavThemeProvider value={navTheme}>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="product/[id]"
+                  options={{ title: 'Product Details', headerBackTitle: 'Products' }}
+                />
+                <Stack.Screen
+                  name="checkout"
+                  options={{ title: 'Order Confirmation', headerBackTitle: 'Cart' }}
+                />
+              </Stack>
+              <ThemedStatusBar />
+            </NavThemeProvider>
+          )}
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </RootErrorBoundary>
+  )
+}
