@@ -12,7 +12,7 @@ A full-stack retail shopping experience built as two independent packages.
 ## How they fit together
 
 ```
-mobile-react-native  ──HTTP──▶  retail-bff  (default: port 3000)
+mobile-react-native  ──▶ HTTP ──▶  retail-bff  (default: port 3000)
 ```
 
 The BFF is a self-contained REST API with in-memory state (no database). The app consumes it directly — no authentication layer, no middleware.
@@ -23,10 +23,10 @@ The BFF is a self-contained REST API with in-memory state (no database). The app
 
 ```bash
 # 1. Start the BFF
-cd retail-bff && yarn install && yarn start:dev
+cd retail-bff && npm install && npm run start:dev
 
 # 2. In a new terminal, start the app
-cd mobile-react-native && yarn install && yarn start
+cd mobile-react-native && npm install && npm start
 ```
 
 See each package's README for full setup, environment config, and test instructions.

@@ -140,18 +140,18 @@ Tests are written with **Jest** + **@testing-library/react-native**, following t
 ## Running the App
 
 ```bash
-# Install dependencies (uses yarn per project convention)
-yarn install
+# Install dependencies
+npm install
 
 # Start BFF first
 cd ../retail-bff && npm run start:dev
 
 # Start the app
-cd ../mobile-react-native && yarn start
+cd ../mobile-react-native && npm start
 
 # Run tests
-yarn test
+npm test
 
 # Coverage report
-yarn coverage
+npm run coverage
 ```

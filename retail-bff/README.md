@@ -20,11 +20,11 @@ NestJS REST API (Backend-for-Frontend) that powers the retail mobile app. All st
 ## Running
 
 ```bash
-yarn install
+npm install
 
-yarn start:dev   # watch mode (recommended during development)
-yarn start       # production mode
-yarn build       # compile to dist/
+npm run start:dev   # watch mode (recommended during development)
+npm start           # production mode
+npm run build       # compile to dist/
 ```
 
 ---
@@ -124,9 +124,9 @@ Error bodies follow NestJS's default shape: `{ statusCode, message, error }`.
 ## Tests
 
 ```bash
-yarn test          # watch mode
-yarn test:cov      # with coverage report
-yarn test:e2e      # end-to-end tests
+npm test               # unit tests
+npm run test:cov       # with coverage report
+npm run test:e2e       # end-to-end tests
 ```
 
 Tests use Jest. Unit tests cover services and the discount engine; e2e tests cover the full HTTP layer via Supertest.

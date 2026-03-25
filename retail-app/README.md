@@ -14,7 +14,7 @@ React Native / Expo customer-facing app for the retail BFF. Browse products, man
 | State | Zustand 5 (with AsyncStorage persistence) |
 | Navigation | React Navigation 7 |
 | Tests | Jest 29 · @testing-library/react-native |
-| Package manager | Yarn |
+| Package manager | npm |
 
 ---
 
@@ -32,7 +32,6 @@ React Native / Expo customer-facing app for the retail BFF. Browse products, man
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 20+
-- [Yarn](https://yarnpkg.com/)
 - [Expo Go](https://expo.dev/client) on your device **or** an iOS Simulator / Android Emulator
 - The `retail-bff` running locally (see [retail-bff/README.md](../retail-bff/README.md))
 
@@ -62,8 +61,8 @@ EXPO_PUBLIC_BFF_URL=http://10.0.2.2:3000
 ## Install & run
 
 ```bash
-yarn install
-yarn start
+npm install
+npm start
 ```
 
 - Scan the QR code with **Expo Go**
@@ -75,8 +74,8 @@ yarn start
 ## Tests
 
 ```bash
-yarn test        # watch mode
-yarn coverage    # coverage report
+npm test             # watch mode
+npm run coverage     # coverage report
 ```
 
 ### What is tested
