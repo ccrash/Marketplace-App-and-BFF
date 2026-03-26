@@ -4,6 +4,10 @@ React Native / Expo customer-facing app for the retail BFF. Browse products, man
 
 ---
 
+![plot](./assets/screenshots/ios_recording.gif)
+
+---
+
 ## Tech stack
 
 | | |

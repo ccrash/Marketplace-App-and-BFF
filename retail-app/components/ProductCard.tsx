@@ -1,10 +1,12 @@
 import { memo } from 'react'
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { View, Text, Pressable, StyleSheet, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from '@theme/ThemeProvider'
 import type { AppTheme } from '@theme/tokens'
 import { formatPrice } from '@utils/format'
 import type { Product } from '@/types/product'
+
+const BASE_URL = process.env.EXPO_PUBLIC_BFF_URL ?? 'http://localhost:3000'
 
 type Props = {
   product: Product
@@ -14,7 +16,6 @@ type Props = {
 function ProductCard({ product, onPress }: Props) {
   const theme = useTheme()
   const styles = makeStyles(theme)
-  const outOfStock = product.stock.available === 0
 
   return (
     <Pressable
@@ -23,20 +24,30 @@ function ProductCard({ product, onPress }: Props) {
       accessibilityRole="button"
       accessibilityLabel={`${product.name}, ${formatPrice(product.price)}`}
     >
-      <View style={styles.row}>
-        <View style={styles.icon}>
-          <Ionicons name="cube-outline" size={28} color={theme.colors.primary} />
-        </View>
-        <View style={styles.info}>
-          <Text style={styles.name} numberOfLines={2}>{product.name}</Text>
+      <View style={styles.imageContainer}>
+        {product.imageUrl ? (
+          <Image
+            source={{ uri: `${BASE_URL}${product.imageUrl}` }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        ) : (
+          <View style={styles.imagePlaceholder}>
+            <Ionicons name="cube-outline" size={40} color={theme.colors.primary} />
+          </View>
+        )}
+      </View>
+      <View style={styles.body}>
+        <Text style={styles.name} numberOfLines={1}>{product.name}</Text>
+        <View style={styles.footer}>
           <Text style={styles.category}>{product.category}</Text>
-        </View>
-        <View style={styles.right}>
           <Text style={styles.price}>{formatPrice(product.price)}</Text>
-          <Text style={[styles.stock, outOfStock && styles.stockOut]}>
-            {outOfStock ? 'Out of stock' : `${product.stock.available} left`}
-          </Text>
         </View>
+        {product.stock.available === 0 ? (
+          <Text style={styles.outOfStock}>Out of stock</Text>
+        ) : (
+          <Text style={styles.stock}>{product.stock.available} left</Text>
+        )}
       </View>
     </Pressable>
   )
@@ -45,31 +56,61 @@ function ProductCard({ product, onPress }: Props) {
 const makeStyles = (t: AppTheme) =>
   StyleSheet.create({
     card: {
+      flex: 1,
       backgroundColor: t.colors.card,
       borderRadius: t.radius,
-      padding: t.spacing(4),
-      marginHorizontal: t.spacing(4),
-      marginBottom: t.spacing(3),
+      margin: t.spacing(2),
       borderWidth: 1,
       borderColor: t.colors.border,
+      overflow: 'hidden',
     },
     pressed: { opacity: 0.7 },
-    row: { flexDirection: 'row', alignItems: 'center', gap: t.spacing(3) },
-    icon: {
-      width: 44,
-      height: 44,
-      borderRadius: t.radius,
+    imageContainer: {
+      width: '100%',
+      height: 160,
       backgroundColor: t.colors.bg,
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+    },
+    imagePlaceholder: {
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    info: { flex: 1 },
-    name: { fontSize: 15, fontWeight: '600', color: t.colors.text, marginBottom: 2 },
-    category: { fontSize: 12, color: t.colors.muted, textTransform: 'capitalize' },
-    right: { alignItems: 'flex-end' },
-    price: { fontSize: 16, fontWeight: '700', color: t.colors.primary },
-    stock: { fontSize: 12, color: t.colors.muted, marginTop: 2 },
-    stockOut: { color: '#ef4444' },
+    body: {
+      padding: t.spacing(3),
+      gap: t.spacing(1),
+    },
+    name: {
+      fontSize: 15,
+      fontWeight: '600',
+      color: t.colors.text,
+    },
+    footer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    category: {
+      fontSize: 12,
+      color: t.colors.muted,
+      textTransform: 'capitalize',
+    },
+    price: {
+      fontSize: 15,
+      fontWeight: '700',
+      color: t.colors.primary,
+    },
+    stock: {
+      fontSize: 12,
+      color: t.colors.muted,
+    },
+    outOfStock: {
+      fontSize: 12,
+      color: t.colors.error,
+    },
   })
 
 export default memo(ProductCard)

@@ -163,13 +163,24 @@ describe('addItem', () => {
     expect(useCartStore.getState().cartId).toBe('fresh-cart')
   })
 
-  it('sets error on 400 insufficient stock', async () => {
+  it('sets error and throws on 400 insufficient stock', async () => {
     useCartStore.setState({ cartId: 'cart-123' })
     ;(mockAddItemToCart as jest.Mock).mockRejectedValue(new ApiError(400, 'Insufficient stock'))
 
+    await expect(useCartStore.getState().addItem('p1')).rejects.toMatchObject({ status: 400 })
+    expect(useCartStore.getState().error).toBe('Insufficient stock')
+  })
+
+  it('handles stale cart (404): resets state and retries with new cart', async () => {
+    useCartStore.setState({ cartId: 'old-cart' })
+    ;(mockAddItemToCart as jest.Mock)
+      .mockRejectedValueOnce(new ApiError(404, 'Cart not found'))
+      .mockResolvedValue(makeCart())
+    ;(mockCreateCart as jest.Mock).mockResolvedValue({ cartId: 'fresh-cart', expiresAt: '2099-01-01T00:00:00Z' })
+
     await useCartStore.getState().addItem('p1')
 
-    expect(useCartStore.getState().error).toBe('Insufficient stock')
+    expect(useCartStore.getState().cartId).toBe('fresh-cart')
   })
 })
 

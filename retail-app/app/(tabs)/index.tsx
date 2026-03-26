@@ -78,6 +78,7 @@ export default function ProductsScreen() {
       data={products}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
+      numColumns={2}
       contentContainerStyle={[styles.list, products.length === 0 && styles.listEmpty]}
       style={{ backgroundColor: theme.colors.bg }}
       ListEmptyComponent={
@@ -98,7 +99,7 @@ export default function ProductsScreen() {
 
 const makeStyles = (t: AppTheme) =>
   StyleSheet.create({
-    list: { paddingTop: t.spacing(4), paddingBottom: t.spacing(8) },
+    list: { paddingTop: t.spacing(2), paddingBottom: t.spacing(8), paddingHorizontal: t.spacing(2) },
     listEmpty: { flex: 1 },
     center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
     error: { color: ERROR_COLOR, fontSize: 15, textAlign: 'center', marginBottom: 16 },

@@ -7,6 +7,9 @@ export type AppTheme = {
     text: string
     card: string
     primary: string
+    secondary: string
+    error: string
+    special: string
     border: string
     muted: string,
     white: string
@@ -19,7 +22,7 @@ export type AppTheme = {
   spacing: (n: number) => number
 }
 
-export const ERROR_COLOR = '#ef4444'
+export const ERROR_COLOR = '#D12052'
 
 export const makeTheme = (scheme: 'light' | 'dark'): AppTheme => {
   const isDark = scheme === 'dark'
@@ -29,7 +32,10 @@ export const makeTheme = (scheme: 'light' | 'dark'): AppTheme => {
       bg: isDark ? '#0b0b0b' : '#fafafa',
       text: isDark ? '#ffffff' : '#111111',
       card: isDark ? '#161616' : '#ffffff',
-      primary: '#F97316',
+      primary: '#03AED2',
+      secondary: '#F8DE22',
+      error: '#D12052',
+      special: '#F45B26',
       border: isDark ? '#2a2a2a' : '#e5e7eb',
       muted: isDark ? '#9ca3af' : '#6b7280',
       white: '#ffffff',

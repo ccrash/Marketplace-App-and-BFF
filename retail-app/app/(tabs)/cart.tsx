@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { router } from 'expo-router'
 import { useCartStore } from '@store/useCartStore'
+import { useProductsStore } from '@store/useProductsStore'
 import { useTheme } from '@theme/ThemeProvider'
 import type { AppTheme } from '@theme/tokens'
 import { ERROR_COLOR } from '@theme/tokens'
@@ -20,6 +21,7 @@ import type { CartItem } from '@/types/cart'
 export { ScreenErrorBoundary as ErrorBoundary } from '@components/screenErrorBoundary'
 
 export default function CartScreen() {
+  const products = useProductsStore((s) => s.products)
   const cartId = useCartStore((s) => s.cartId)
   const cart = useCartStore((s) => s.cart)
   const isLoading = useCartStore((s) => s.isLoading)
@@ -71,6 +73,7 @@ export default function CartScreen() {
     ({ item }: { item: CartItem }) => (
       <CartItemComponent
         item={item}
+        imageUrl={products.find((p) => p.id === item.productId)?.imageUrl}
         isLoading={loadingProductIds.includes(item.productId)}
         onIncrease={onIncrease}
         onDecrease={onDecrease}

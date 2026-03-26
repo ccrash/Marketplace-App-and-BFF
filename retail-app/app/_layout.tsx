@@ -18,14 +18,14 @@ export default function RootLayout() {
           {(navTheme) => (
             <NavThemeProvider value={navTheme}>
               <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="(tabs)" options={{ headerShown: false, headerBackTitle: '' }} />
                 <Stack.Screen
                   name="product/[id]"
-                  options={{ title: 'Product Details', headerBackTitle: 'Products' }}
+                  options={{ title: 'Product Details', headerBackButtonDisplayMode: 'minimal' }}
                 />
                 <Stack.Screen
                   name="checkout"
-                  options={{ title: 'Order Confirmation', headerBackTitle: 'Cart' }}
+                  options={{ title: 'Order Confirmation', headerBackButtonDisplayMode: 'minimal' }}
                 />
               </Stack>
               <ThemedStatusBar />

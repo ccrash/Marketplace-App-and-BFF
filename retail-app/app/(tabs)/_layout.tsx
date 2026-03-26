@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router'
 import { useEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons'
-import { HapticTab } from '@components/haptic-tab'
+import { HapticTab } from '@components/hapticTab'
 import { useTheme } from '@theme/ThemeProvider'
 import HeaderLogo from '@components/header/logo'
 import HeaderTitle from '@components/header/title'

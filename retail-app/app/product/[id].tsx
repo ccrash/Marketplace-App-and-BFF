@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useRef, useState, useMemo } from 'react'
 import {
   ActivityIndicator,
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -15,6 +16,8 @@ import { useTheme } from '@theme/ThemeProvider'
 import type { AppTheme } from '@theme/tokens'
 import { ERROR_COLOR } from '@theme/tokens'
 import { formatPrice } from '@utils/format'
+
+const BASE_URL = process.env.EXPO_PUBLIC_BFF_URL ?? 'http://localhost:3000'
 
 export default function ProductDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()
@@ -80,18 +83,26 @@ export default function ProductDetailScreen() {
   if (!product) return null
 
   return (
-    <ScrollView
-      style={{ backgroundColor: theme.colors.bg }}
-      contentContainerStyle={styles.container}
-    >
-      {/* Icon header */}
-      <View style={styles.iconWrap}>
-        <Ionicons name="cube-outline" size={72} color={theme.colors.primary} />
+    <ScrollView style={{ backgroundColor: theme.colors.bg }}>
+      {/* Hero image */}
+      <View style={styles.imageContainer}>
+        {product.imageUrl ? (
+          <Image
+            source={{ uri: `${BASE_URL}${product.imageUrl}` }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        ) : (
+          <View style={styles.imagePlaceholder}>
+            <Ionicons name="cube-outline" size={72} color={theme.colors.primary} />
+          </View>
+        )}
       </View>
 
-      {/* Product name & category */}
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.category}>{product.category}</Text>
+      <View style={styles.container}>
+        {/* Product name & category */}
+        <Text style={styles.name}>{product.name}</Text>
+        <Text style={styles.category}>{product.category}</Text>
 
       {/* Price */}
       <Text style={styles.price}>{formatPrice(product.price)}</Text>
@@ -153,6 +164,7 @@ export default function ProductDetailScreen() {
           View Cart
         </Text>
       </Pressable>
+      </View>
     </ScrollView>
   )
 }
@@ -179,17 +191,16 @@ const makeStyles = (t: AppTheme) =>
   StyleSheet.create({
     container: { padding: t.spacing(6), paddingBottom: t.spacing(12) },
     center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
-    iconWrap: {
-      width: 120,
-      height: 120,
-      borderRadius: t.radius * 2,
+    imageContainer: {
+      width: '100%',
+      height: 280,
       backgroundColor: t.colors.card,
+    },
+    image: { width: '100%', height: '100%' },
+    imagePlaceholder: {
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      alignSelf: 'center',
-      marginBottom: t.spacing(6),
-      borderWidth: 1,
-      borderColor: t.colors.border,
     },
     name: {
       fontSize: 22,

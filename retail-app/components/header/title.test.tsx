@@ -13,7 +13,7 @@ import HeaderTitle from './title'
 describe('HeaderTitle', () => {
   it('renders the app title text', () => {
     render(<HeaderTitle />)
-    expect(screen.getByText('CatAlogue')).toBeTruthy()
+    expect(screen.getByText('Marketplace')).toBeTruthy()
   })
 
   it('has header accessibility role and label', () => {

@@ -8,7 +8,7 @@ export default function HeaderLogo() {
 
   return (
     <View style={styles.wrap} accessibilityRole='header' accessibilityLabel='App header'>
-      <Logo width={30} height={24} fill={theme.colors.primary} />
+      <Logo width={35} height={35} fill={theme.colors.primary} />
     </View>
   )
 }

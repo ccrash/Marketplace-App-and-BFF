@@ -9,5 +9,6 @@ export interface Product {
   name: string
   price: number // pence
   category: string
+  imageUrl?: string
   stock: ProductStock
 }

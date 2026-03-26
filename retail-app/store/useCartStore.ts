@@ -73,7 +73,9 @@ export const useCartStore = create<CartState & CartActions>()(
             loadingProductIds: s.loadingProductIds.filter((id) => id !== productId),
           }))
         } catch (err) {
-          if (err instanceof ApiError && err.status === 410) {
+          const isStaleCart =
+            err instanceof ApiError && (err.status === 410 || err.status === 404)
+          if (isStaleCart) {
             get().handleExpiredCart()
             // Retry once with a fresh cart
             try {
@@ -93,6 +95,7 @@ export const useCartStore = create<CartState & CartActions>()(
             loadingProductIds: s.loadingProductIds.filter((id) => id !== productId),
             error: formatError(err),
           }))
+          throw err
         }
       },
 

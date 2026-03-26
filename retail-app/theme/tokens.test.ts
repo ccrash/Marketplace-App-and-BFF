@@ -2,7 +2,7 @@ import { makeTheme, makeNavTheme, ERROR_COLOR } from './tokens'
 
 describe('ERROR_COLOR', () => {
   it('is the expected red hex value', () => {
-    expect(ERROR_COLOR).toBe('#ef4444')
+    expect(ERROR_COLOR).toBe('#D12052')
   })
 })
 
@@ -26,7 +26,7 @@ describe('makeTheme — light', () => {
   })
 
   it('has the correct primary color', () => {
-    expect(light.colors.primary).toBe('#F97316')
+    expect(light.colors.primary).toBe('#03AED2')
   })
 
   it('has the correct border color', () => {
@@ -80,7 +80,7 @@ describe('makeTheme — dark', () => {
   })
 
   it('has the correct primary color', () => {
-    expect(dark.colors.primary).toBe('#F97316')
+    expect(dark.colors.primary).toBe('#03AED2')
   })
 
   it('has the correct border color', () => {
