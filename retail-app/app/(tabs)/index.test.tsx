@@ -43,7 +43,7 @@ jest.mock('@components/EmptyState', () => {
   return ({ title }: any) => <Text testID="empty-state">{title}</Text>
 })
 
-jest.mock('@components/screenErrorBoundary', () => ({
+jest.mock('@components/ScreenErrorBoundary', () => ({
   ScreenErrorBoundary: ({ children }: any) => children,
 }))
 

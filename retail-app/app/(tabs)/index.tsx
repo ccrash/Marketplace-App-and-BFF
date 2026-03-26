@@ -17,7 +17,7 @@ import ProductCard from '@components/ProductCard'
 import EmptyState from '@components/EmptyState'
 import type { Product } from '@/types/product'
 
-export { ScreenErrorBoundary as ErrorBoundary } from '@components/screenErrorBoundary'
+export { ScreenErrorBoundary as ErrorBoundary } from '@components/ScreenErrorBoundary'
 
 export default function ProductsScreen() {
   const products = useProductsStore((s) => s.products)

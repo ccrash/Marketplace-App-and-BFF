@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react-native'
-import { ScreenErrorBoundary } from './screenErrorBoundary'
+import { ScreenErrorBoundary } from './ScreenErrorBoundary'
 
 describe('ScreenErrorBoundary', () => {
   const retry = jest.fn()

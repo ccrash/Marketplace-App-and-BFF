@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { render, screen } from '@testing-library/react-native'
-import { RootErrorBoundary } from './rootErrorBoundary'
+import { RootErrorBoundary } from './RootErrorBoundary'
 
 // Suppress expected console.error output from React's error boundary machinery
 beforeEach(() => jest.spyOn(console, 'error').mockImplementation(() => {}))

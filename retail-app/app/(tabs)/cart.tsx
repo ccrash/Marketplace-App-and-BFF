@@ -18,7 +18,7 @@ import EmptyState from '@components/EmptyState'
 import { formatPrice } from '@utils/format'
 import type { CartItem } from '@/types/cart'
 
-export { ScreenErrorBoundary as ErrorBoundary } from '@components/screenErrorBoundary'
+export { ScreenErrorBoundary as ErrorBoundary } from '@components/ScreenErrorBoundary'
 
 export default function CartScreen() {
   const products = useProductsStore((s) => s.products)

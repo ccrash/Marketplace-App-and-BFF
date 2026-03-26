@@ -1,11 +1,11 @@
 import { Tabs } from 'expo-router'
 import { useEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons'
-import { HapticTab } from '@components/hapticTab'
+import { HapticTab } from '@components/HapticTab'
 import { useTheme } from '@theme/ThemeProvider'
-import HeaderLogo from '@components/header/logo'
-import HeaderTitle from '@components/header/title'
-import HeaderThemeSwitch from '@components/header/themeSwitch'
+import HeaderLogo from '@components/header/Logo'
+import HeaderTitle from '@components/header/Title'
+import HeaderThemeSwitch from '@components/header/ThemeSwitch'
 import { useCartStore } from '@store/useCartStore'
 
 export default function TabLayout() {

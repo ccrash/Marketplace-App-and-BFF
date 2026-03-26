@@ -3,8 +3,8 @@ import { ThemeProvider as NavThemeProvider } from '@react-navigation/native'
 import { Stack } from 'expo-router'
 import 'react-native-reanimated'
 import { ThemeProvider } from '@theme/ThemeProvider'
-import ThemedStatusBar from '@components/themedStatusBar'
-import { RootErrorBoundary } from '@components/rootErrorBoundary'
+import ThemedStatusBar from '@components/ThemedStatusBar'
+import { RootErrorBoundary } from '@components/RootErrorBoundary'
 
 export const unstable_settings = {
   anchor: '(tabs)',
