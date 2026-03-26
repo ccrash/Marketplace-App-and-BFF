@@ -5,6 +5,7 @@ import type { OrderSummary } from '@/types/order'
 export const makeProduct = (id: string, overrides: Partial<Product> = {}): Product => ({
   id,
   name: `Product ${id}`,
+  description: `Description for ${id}`,
   price: 999,
   category: 'electronics',
   stock: { available: 10 },

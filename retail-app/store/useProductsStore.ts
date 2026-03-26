@@ -15,6 +15,8 @@ type ProductsState = {
 type ProductsActions = {
   loadProducts: () => Promise<void>
   loadProduct: (id: string) => Promise<void>
+  /** Shift `available` by `delta` and `reserved` by `-delta` on the selected product. */
+  adjustSelectedProductStock: (delta: number) => void
   clearError: () => void
 }
 
@@ -45,6 +47,22 @@ export const useProductsStore = create<ProductsState & ProductsActions>((set) =>
       set({ isLoadingProduct: false, productError: formatError(err) })
     }
   },
+
+  adjustSelectedProductStock: (delta) =>
+    set((s) => {
+      if (!s.selectedProduct) return s
+      const stock = s.selectedProduct.stock
+      return {
+        selectedProduct: {
+          ...s.selectedProduct,
+          stock: {
+            ...stock,
+            available: stock.available + delta,
+            ...(stock.reserved !== undefined && { reserved: stock.reserved - delta }),
+          },
+        },
+      }
+    }),
 
   clearError: () => set({ error: null, productError: null }),
 }))

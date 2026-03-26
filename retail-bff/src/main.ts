@@ -13,7 +13,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  app.useStaticAssets(join(__dirname, '..', 'assets'), {
+  app.useStaticAssets(join(process.cwd(), 'assets'), {
     prefix: '/assets',
   });
   app.enableCors();

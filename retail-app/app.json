@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "amazing_catalogue",
-    "slug": "amazing_catalogue",
+    "name": "MyMarketplace",
+    "slug": "mymarketplace",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "scheme": "amazingcatalogue",
+    "icon": "./assets/myicon.png",
+    "scheme": "mymarketplace",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -14,9 +14,9 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/icon.png",
-        "backgroundImage": "./assets/icon.png",
-        "monochromeImage": "./assets/icon.png"
+        "foregroundImage": "./assets/myicon.png",
+        "backgroundImage": "./assets/myicon.png",
+        "monochromeImage": "./assets/myicon.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,

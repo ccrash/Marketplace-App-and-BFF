@@ -25,6 +25,8 @@ export default function ProductDetailScreen() {
   const isLoadingProduct = useProductsStore((s) => s.isLoadingProduct)
   const productError = useProductsStore((s) => s.productError)
   const loadProduct = useProductsStore((s) => s.loadProduct)
+  const adjustSelectedProductStock = useProductsStore((s) => s.adjustSelectedProductStock)
+
 
   const addItem = useCartStore((s) => s.addItem)
   const loadingProductIds = useCartStore((s) => s.loadingProductIds)
@@ -52,14 +54,16 @@ export default function ProductDetailScreen() {
   const onAddToCart = useCallback(async () => {
     if (!product) return
     setAddError(null)
+    adjustSelectedProductStock(-1)
     try {
       await addItem(product.id)
       setAddedFeedback(true)
       feedbackTimerRef.current = setTimeout(() => setAddedFeedback(false), 2000)
     } catch (err) {
+      adjustSelectedProductStock(1)
       setAddError((err as Error).message)
     }
-  }, [product, addItem])
+  }, [product, addItem, adjustSelectedProductStock])
 
   if (isLoadingProduct) {
     return (
@@ -103,6 +107,11 @@ export default function ProductDetailScreen() {
         {/* Product name & category */}
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.category}>{product.category}</Text>
+
+        {/* Description */}
+        {product.description && (
+          <Text style={styles.description}>{product.description}</Text>
+        )}
 
       {/* Price */}
       <Text style={styles.price}>{formatPrice(product.price)}</Text>
@@ -214,6 +223,13 @@ const makeStyles = (t: AppTheme) =>
       color: t.colors.muted,
       textAlign: 'center',
       textTransform: 'capitalize',
+      marginBottom: t.spacing(2),
+    },
+    description: {
+      fontSize: 15,
+      color: t.colors.text,
+      textAlign: 'center',
+      lineHeight: 22,
       marginBottom: t.spacing(4),
     },
     price: {

@@ -16,7 +16,7 @@ The API starts on **http://localhost:3000**. Set `PORT=<n>` to use a different p
 
 **1. Configure the BFF URL**
 
-Create `mobile-react-native/.env.local`:
+Create `retail-app/.env.local`:
 
 ```bash
 # iOS Simulator
@@ -32,7 +32,7 @@ EXPO_PUBLIC_BFF_URL=http://192.168.x.x:3000
 **2. Start the app**
 
 ```bash
-cd mobile-react-native
+cd retail-app
 npm install
 npm start
 ```
@@ -68,7 +68,7 @@ npm test && npm run test:e2e
 ### React Native app
 
 ```bash
-cd mobile-react-native
+cd retail-app
 npm test
 ```
 
@@ -96,6 +96,6 @@ npm test
 
 ```
 retail-bff/          NestJS BFF — see retail-bff/README.md
-mobile-react-native/ React Native app — see mobile-react-native/README.md
+retail-app/          React Native app — see retail-app/README.md
 .github/workflows/   CI (both test suites run on every push/PR)
 ```

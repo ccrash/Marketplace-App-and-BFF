@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test -- --passWithNoTests
+        run: npm test
 
   test-bff:
     name: BFF (NestJS)
@@ -52,3 +52,6 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Run E2E tests
+        run: npm run test:e2e

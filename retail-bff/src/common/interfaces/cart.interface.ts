@@ -3,6 +3,7 @@ import { AppliedDiscount } from './discount.interface';
 export interface CartItem {
   productId: string;
   productName: string;
+  category: string;   // snapshot at time of adding — used by MULTI_BUY_FIXED discount engine
   unitPrice: number;  // pence — snapshot at time of adding
   quantity: number;
   lineTotal: number;  // unitPrice * quantity

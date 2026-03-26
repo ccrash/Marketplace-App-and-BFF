@@ -14,11 +14,13 @@ jest.mock('@theme/ThemeProvider', () => ({
 }))
 
 const mockLoadProduct = jest.fn()
+const mockAdjustStock = jest.fn()
 const mockProductsState: any = {
   selectedProduct: null,
   isLoadingProduct: false,
   productError: null,
   loadProduct: mockLoadProduct,
+  adjustSelectedProductStock: mockAdjustStock,
 }
 
 jest.mock('@store/useProductsStore', () => ({
@@ -50,6 +52,7 @@ beforeEach(() => {
   mockProductsState.isLoadingProduct = false
   mockProductsState.productError = null
   mockProductsState.loadProduct = mockLoadProduct
+  mockProductsState.adjustSelectedProductStock = mockAdjustStock
   mockCartState.loadingProductIds = []
   mockCartState.addItem = mockAddItem
 })
@@ -104,6 +107,20 @@ describe('ProductDetailScreen — product display', () => {
     expect(screen.getByText('£279.99')).toBeTruthy()
   })
 
+  it('renders the product description when present', () => {
+    mockProductsState.selectedProduct = makeProduct('prod_001', {
+      description: 'Industry-leading noise cancelling headphones.',
+    })
+    render(<ProductDetailScreen />)
+    expect(screen.getByText('Industry-leading noise cancelling headphones.')).toBeTruthy()
+  })
+
+  it('does not render a description element when description is absent', () => {
+    mockProductsState.selectedProduct = makeProduct('prod_001', { description: undefined })
+    render(<ProductDetailScreen />)
+    expect(screen.queryByText('Description for prod_001')).toBeNull()
+  })
+
   it('renders the available stock count and label', () => {
     mockProductsState.selectedProduct = makeProduct('prod_001', {
       stock: { available: 15 },
@@ -154,6 +171,27 @@ describe('ProductDetailScreen — add to cart', () => {
       fireEvent.press(screen.getByText('Add to Cart'))
     })
     expect(screen.getByText('Added to cart!')).toBeTruthy()
+  })
+
+  it('optimistically decrements stock by 1 when Add to Cart is pressed', async () => {
+    mockAddItem.mockResolvedValue(undefined)
+    mockProductsState.selectedProduct = makeProduct('prod_001', { stock: { available: 10 } })
+    render(<ProductDetailScreen />)
+    await act(async () => {
+      fireEvent.press(screen.getByText('Add to Cart'))
+    })
+    expect(mockAdjustStock).toHaveBeenCalledWith(-1)
+  })
+
+  it('reverts the stock decrement when addItem rejects', async () => {
+    mockAddItem.mockRejectedValue(new Error('Insufficient stock'))
+    mockProductsState.selectedProduct = makeProduct('prod_001', { stock: { available: 10 } })
+    render(<ProductDetailScreen />)
+    await act(async () => {
+      fireEvent.press(screen.getByText('Add to Cart'))
+    })
+    expect(mockAdjustStock).toHaveBeenCalledWith(-1)
+    expect(mockAdjustStock).toHaveBeenCalledWith(1)
   })
 
   it('shows an inline error message when addItem rejects', async () => {

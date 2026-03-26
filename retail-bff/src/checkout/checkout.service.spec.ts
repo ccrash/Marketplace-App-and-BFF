@@ -15,6 +15,7 @@ function makeActiveCart(cartId: string): Cart {
       {
         productId: 'prod_001',
         productName: 'Sony Headphones',
+        category: 'electronics',
         unitPrice: 27999,
         quantity: 1,
         lineTotal: 27999,

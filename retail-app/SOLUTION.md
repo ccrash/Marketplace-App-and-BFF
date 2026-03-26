@@ -147,7 +147,7 @@ npm install
 cd ../retail-bff && npm run start:dev
 
 # Start the app
-cd ../mobile-react-native && npm start
+cd ../retail-app && npm start
 
 # Run tests
 npm test

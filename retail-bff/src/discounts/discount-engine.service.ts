@@ -147,7 +147,7 @@ export class DiscountEngineService {
 
     // Gather qualifying items that haven't already been discounted at the product level
     const qualifyingItems = items.filter(
-      (i) => categories.includes(i['category'] as string) && !discountedIds.has(i.productId),
+      (i) => categories.includes(i.category) && !discountedIds.has(i.productId),
     );
 
     if (qualifyingItems.length === 0) return null;

@@ -61,12 +61,11 @@ export class CartService {
       const item: CartItem = {
         productId,
         productName: product.name,
+        category: product.category,
         unitPrice: product.price,
         quantity,
         lineTotal: product.price * quantity,
       };
-      // Attach category for multi-buy discount engine (stored as non-enumerable trick avoided — just add it)
-      (item as any).category = product.category;
       cart.items.push(item);
     }
 
