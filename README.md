@@ -5,14 +5,14 @@ A full-stack retail shopping experience built as two independent packages.
 | Package | Tech | Docs |
 |---|---|---|
 | [`retail-bff`](./retail-bff) | NestJS · TypeScript | [retail-bff/README.md](./retail-bff/README.md) |
-| [`mobile-react-native`](./mobile-react-native) | React Native · Expo · TypeScript | [mobile-react-native/README.md](./mobile-react-native/README.md) |
+| [`retail-app`](./retail-app) | React Native · Expo · TypeScript | [retail-app/README.md](./retail-app/README.md) |
 
 ---
 
 ## How they fit together
 
 ```
-mobile-react-native  ──▶ HTTP ──▶  retail-bff  (default: port 3000)
+retail-app  ──▶ HTTP ──▶  retail-bff  (default: port 3000)
 ```
 
 The BFF is a self-contained REST API with in-memory state (no database). The app consumes it directly — no authentication layer, no middleware.
@@ -26,7 +26,7 @@ The BFF is a self-contained REST API with in-memory state (no database). The app
 cd retail-bff && npm install && npm run start:dev
 
 # 2. In a new terminal, start the app
-cd mobile-react-native && npm install && npm start
+cd retail-app && npm install && npm start
 ```
 
 See each package's README for full setup, environment config, and test instructions.
