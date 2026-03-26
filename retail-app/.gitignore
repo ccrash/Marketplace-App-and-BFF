@@ -50,6 +50,7 @@ app-example
 
 # env
 .env.*
+!.env.example
 
 # claude
 CLAUDE.md
