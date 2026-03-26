@@ -8,7 +8,7 @@ jest.mock('@theme/ThemeProvider', () => ({
   }),
 }))
 
-import HeaderTitle from './title'
+import HeaderTitle from './Title'
 
 describe('HeaderTitle', () => {
   it('renders the app title text', () => {

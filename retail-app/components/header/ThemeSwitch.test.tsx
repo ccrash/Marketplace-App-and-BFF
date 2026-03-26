@@ -27,7 +27,7 @@ jest.mock('@theme/ThemeProvider', () => ({
   useTheme: () => ({ colors: { text: '#101010' } }),
 }))
 
-import HeaderThemeSwitch from './themeSwitch'
+import HeaderThemeSwitch from './ThemeSwitch'
 
 const getThumbColor = (node: any) =>
   node.props.thumbColor ?? node.props.thumbTintColor ?? node.props?.style?.thumbColor
