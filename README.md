@@ -36,3 +36,10 @@ See each package's README for full setup, environment config, and test instructi
 ## CI
 
 Both test suites run on every push and pull request to `main` via GitHub Actions (`.github/workflows/ci.yml`).
+
+## License
+
+This project is licensed under a custom non-commercial license.
+
+❗ Commercial use is prohibited  
+❗ Use in AI/ML systems is strictly prohibited without permission
